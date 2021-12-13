@@ -1,22 +1,19 @@
 package com.nylgsc.nio.群聊;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 
-public class GroupChatServer {
+public class ChatServer {
     //定义属性
     private Selector selector;
     private ServerSocketChannel listenChannel;
     private static final int PORT = 8888;
 
     //构造器，初始化工作
-    public GroupChatServer(){
+    public ChatServer(){
         try {
             //得到选择器
             selector = Selector.open();
@@ -128,7 +125,7 @@ public class GroupChatServer {
     }
 
     public static void main(String[] args) {
-        GroupChatServer chatServer = new GroupChatServer();
+        ChatServer chatServer = new ChatServer();
         chatServer.listen();
     }
 }

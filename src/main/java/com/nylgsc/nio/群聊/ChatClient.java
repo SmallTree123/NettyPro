@@ -3,14 +3,13 @@ package com.nylgsc.nio.群聊;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class GroupChatClient {
+public class ChatClient {
 
     //定义相关属性
     private final String HOST = "127.0.0.1";
@@ -20,7 +19,7 @@ public class GroupChatClient {
     private String username;
 
     //构造器，完成初始化工作
-    public GroupChatClient() throws Exception{
+    public ChatClient() throws Exception{
         selector = Selector.open();
         //连接服务器
         socketChannel = socketChannel.open(new InetSocketAddress(HOST, PORT));
@@ -72,11 +71,11 @@ public class GroupChatClient {
     }
 
     public static void main(String[] args) throws Exception {
-        GroupChatClient groupChatClient = new GroupChatClient();
+        ChatClient chatClient = new ChatClient();
         //启动一个线程，读取从服务器过来的数据
         new Thread(()->{
             while (true){
-                groupChatClient.readInfo();
+                chatClient.readInfo();
                 try {
                     Thread.currentThread().sleep(3000);
                 } catch (InterruptedException e) {
@@ -89,7 +88,7 @@ public class GroupChatClient {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()){
             String s = scanner.nextLine();
-            groupChatClient.sendInfo(s);
+            chatClient.sendInfo(s);
         }
     }
 }
